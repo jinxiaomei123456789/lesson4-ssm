@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jin.lesson4ssm.mapper.UserMapper">
+    <resultMap id="userMap" type="com.jin.lesson4ssm.pojo.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password"  column="password" />
+    </resultMap>
+
+
+    <select id="userList" resultMap="userMap">
+        select * from user
+    </select>
+
+    <select id="findById" parameterType="Integer" resultMap="userMap">
+        select * from user where id = #{id}
+    </select>
+
+    <insert id="userAdd" parameterType="String" >
+        insert into user(username,password) values(#{0},#{1})
+    </insert>
+
+    <delete id="userDelete" parameterType="Integer">
+        delete from user where id=(#{id})
+    </delete>
+    <update id="userUpdate" parameterType="User">
+        update user set username=(#{username}),password=(#{password}) where id=(#{id})
+    </update>
+
+</mapper>
+
